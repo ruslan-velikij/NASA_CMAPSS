@@ -98,3 +98,17 @@ test_preds = rf_model.predict(X_test)
 
 # 6.E. Извлечение реальных значений RUL из загруженного файла
 y_test_true = rul_df["RUL"].values
+
+
+print("# Шаг 7: Сравнение предсказаний с реальными RUL")
+# 7.A. Вычисление метрик ошибки на тестовом наборе
+rmse_test = mean_squared_error(y_test_true, test_preds, squared=False)
+mae_test = mean_absolute_error(y_test_true, test_preds)
+print(f"RMSE на тестовом наборе: {rmse_test:.2f} циклов")
+print(f"MAE на тестовом наборе: {mae_test:.2f} циклов")
+
+# 7.B. Примеры: сравнение для первых 20 двигателей
+for i in range(1, 20):
+    actual = y_test_true[i-1]
+    predicted = test_preds[i-1]
+    print(f"Двигатель {i}: реальный RUL = {actual}, предсказанный RUL ≈ {predicted:.1f}")
