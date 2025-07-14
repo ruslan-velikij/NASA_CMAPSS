@@ -128,3 +128,32 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+
+print("\n# Шаг 9: Визуализация результатов предсказания vs реальный RUL, где ошибка по модулю меньше 35")
+# 9.A. Сравнение предсказаний с реальными RUL, где ошибка по модулю меньше 35
+engine_ids = np.arange(1, len(test_preds) + 1)
+errors = np.abs(test_preds - y_test_true)
+threshold = 35
+mask = errors < threshold
+filtered_ids = engine_ids[mask]
+filtered_preds = test_preds[mask]
+filtered_true = y_test_true[mask]
+print("Двигатели с ошибкой < 35 циклов:")
+print(filtered_ids.tolist())
+
+percentage = len(filtered_ids) / len(engine_ids) * 100
+print(f"\nКоличество таких двигателей: {len(filtered_ids)} из {len(engine_ids)}")
+print(f"Это {percentage:.2f}% от всех двигателей\n")
+
+# 9.B. Визуализация результатов предсказания vs реальный RUL, где ошибка по модулю меньше 35
+plt.figure(figsize=(12, 6))
+plt.plot(filtered_ids, filtered_true, label="Реальный RUL", marker='o')
+plt.plot(filtered_ids, filtered_preds, label="Предсказанный RUL", marker='x')
+plt.xlabel("Номер двигателя")
+plt.ylabel("RUL (оставшиеся циклы)")
+plt.title(f"Двигатели с ошибкой < {threshold} циклов")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
