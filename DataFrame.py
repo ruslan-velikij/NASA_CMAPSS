@@ -6,7 +6,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
 import sys
 
-sys.stdout = open('output.txt', 'w', encoding='utf-8')
+sys.stdout = open('output.md', 'w', encoding='utf-8')
 
 print("# Шаг 1: Подготовка данных")
 # 1.B. Загрузка обучающих данных
