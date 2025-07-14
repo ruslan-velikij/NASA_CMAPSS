@@ -1,11 +1,14 @@
-print("# Шаг 1: Подготовка данных")
 # 1.A. Загрузка необходимых библиотек
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
+import sys
 
+sys.stdout = open('output.txt', 'w', encoding='utf-8')
+
+print("# Шаг 1: Подготовка данных")
 # 1.B. Загрузка обучающих данных
 col_names = ["id", "cycle", "setting1", "setting2", "setting3"] + [f"sensor{i}" for i in range(1, 22)]
 train_df = pd.read_csv("datasets/train_FD001.txt", sep=r'\s+', header=None, names=col_names)
@@ -157,3 +160,6 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+
+sys.stdout.close()
