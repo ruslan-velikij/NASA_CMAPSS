@@ -3,14 +3,14 @@ Machine learning model training by NASA CMPASS dataset
 
 ## Libs download
 In project directory:
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+- python -m venv venv
+- venv\Scripts\activate
+- pip install -r requirements.txt
 
 ## Start application (Windows 10)
 In project directory:
-vent\Scripts\activate
-.venv\Scripts\python.exe DataFrame.py
+- vent\Scripts\activate
+- .venv\Scripts\python.exe DataFrame.py
 
 ### Особенности задачи:
 - Беру первый датасет "FD001, Траектории движения поездов: 100, Тестовых траекторий: 100, Условий: ОДИН (уровень моря), Режимы неисправностей: ОДИН (деградация HPC)"
