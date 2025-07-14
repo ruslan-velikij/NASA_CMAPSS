@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+import matplotlib.pyplot as plt
 
 # 1.B. Загрузка обучающих данных
 col_names = ["id", "cycle", "setting1", "setting2", "setting3"] + [f"sensor{i}" for i in range(1, 22)]
@@ -91,7 +92,7 @@ print(test_last[["id", "cycle"]].head(10))
 
 # 6.C. Подготовка признаков для прогноза (аналогично обучению)
 X_test = test_last.drop(cols_to_drop, axis=1)
-print("Признаки для тестовых данных:", X_test.columns.tolist())
+print(f'Признаки для тестовых данных: {X_test.columns.tolist()}\n')
 
 # 6.D. Применение модели для предсказания RUL на тестовых данных
 test_preds = rf_model.predict(X_test)
@@ -108,7 +109,22 @@ print(f"RMSE на тестовом наборе: {rmse_test:.2f} циклов")
 print(f"MAE на тестовом наборе: {mae_test:.2f} циклов")
 
 # 7.B. Примеры: сравнение для первых 20 двигателей
-for i in range(1, 20):
+for i in range(1, 21):
     actual = y_test_true[i-1]
     predicted = test_preds[i-1]
     print(f"Двигатель {i}: реальный RUL = {actual}, предсказанный RUL ≈ {predicted:.1f}")
+
+
+print("\n# Шаг 8: Визуализация результатов предсказания vs реальный RUL")
+# 8. Визуализация результатов предсказания vs реальный RUL
+engine_ids = list(range(1, len(test_preds) + 1))
+plt.figure(figsize=(12, 6))
+plt.plot(engine_ids, y_test_true, label="Реальный RUL", linewidth=2)
+plt.plot(engine_ids, test_preds, label="Предсказанный RUL", linewidth=2)
+plt.xlabel("Номер двигателя")
+plt.ylabel("RUL (оставшиеся циклы)")
+plt.title("Сравнение предсказанных и реальных значений RUL")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
