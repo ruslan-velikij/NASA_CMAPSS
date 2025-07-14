@@ -102,7 +102,7 @@ y_test_true = rul_df["RUL"].values
 
 print("# Шаг 7: Сравнение предсказаний с реальными RUL")
 # 7.A. Вычисление метрик ошибки на тестовом наборе
-rmse_test = mean_squared_error(y_test_true, test_preds, squared=False)
+rmse_test = np.sqrt(mean_squared_error(y_val, val_predictions))
 mae_test = mean_absolute_error(y_test_true, test_preds)
 print(f"RMSE на тестовом наборе: {rmse_test:.2f} циклов")
 print(f"MAE на тестовом наборе: {mae_test:.2f} циклов")
