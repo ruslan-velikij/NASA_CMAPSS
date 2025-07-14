@@ -62,7 +62,7 @@ val_predictions = rf_model.predict(X_val)
 
 # 5.B. Оценка качества с помощью метрик
 mse_val = mean_squared_error(y_val, val_predictions)
-rmse_val = mean_squared_error(y_val, val_predictions, squared=False)  # squared=False даёт корень MSE
+rmse_val = np.sqrt(mean_squared_error(y_val, val_predictions))
 mae_val = mean_absolute_error(y_val, val_predictions)
 print(f"Среднеквадратичная ошибка (MSE) на валидации: {mse_val:.2f}")
 print(f"Корень из MSE (RMSE) на валидации: {rmse_val:.2f} циклов")
