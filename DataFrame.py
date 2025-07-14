@@ -32,3 +32,11 @@ val_data   = train_df[train_df["id"].isin(val_ids)].copy()
 print("Форма обучающих данных:", train_data.shape)
 print("Форма валидационных данных:", val_data.shape)
 
+# 3.A. Определяем список столбцов, которые будем исключать
+cols_to_drop = ["id", "cycle", "setting3", "sensor1", "sensor5", "sensor10", "sensor16", "sensor18", "sensor19"]
+X_train = train_data.drop(cols_to_drop + ["RUL"], axis=1)
+y_train = train_data["RUL"]
+X_val   = val_data.drop(cols_to_drop + ["RUL"], axis=1)
+y_val   = val_data["RUL"]
+print("Число признаков после удаления лишних столбцов:", X_train.shape[1])
+print("Имена оставшихся признаков:", X_train.columns.tolist())
